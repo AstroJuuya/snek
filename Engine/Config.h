@@ -6,18 +6,9 @@ public:
 	struct Setting
 	{
 		Setting() = default;
-		Setting& operator=(Setting& setting)
-		{
-			value = setting.value;
-		}
-		Setting& operator=(int value)
-		{
-			this->value = float(value);
-		}
-		Setting& operator=(float value)
-		{
-			this->value = value;
-		}
+		Setting& operator=(const Setting& setting);
+		Setting& operator=(const int value);
+		Setting& operator=(const float value);
 		~Setting() = default;
 		enum Option
 		{
@@ -33,8 +24,8 @@ public:
 		float value = 0;
 	};
 	void loadConfig();
-	void loadFromConfig(int& value, const Setting::Option& setting);
-	void loadFromConfig(float& value, const Setting::Option& setting);
+	void loadFromConfig(int& value, const Setting::Option& setting) const;
+	void loadFromConfig(float& value, const Setting::Option& setting) const;
 
 private:
 	Setting settings[Setting::COUNT];
