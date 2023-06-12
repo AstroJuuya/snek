@@ -28,6 +28,7 @@
 #include <random>
 #include "SoundEffect.h"
 #include "FrameTimer.h"
+#include "Config.h"
 
 class Game
 {
@@ -67,34 +68,47 @@ private:
 	bool gameIsOver = false;
 	bool gameIsStarted = false;
 	float soundVolume = 0.2f; // Sound Volume
+	Config::Setting defaultValues[Config::Setting::COUNT]{
+		defaultValues[Config::Setting::TileSize] = 20,
+		defaultValues[Config::Setting::BoardSizeX] = 30,
+		defaultValues[Config::Setting::BoardSizeY] = 22,
+		defaultValues[Config::Setting::SpeedupRate] = 0.93f,
+		defaultValues[Config::Setting::PoisonAmount] = 240,
+		defaultValues[Config::Setting::FoodAmount] = 12,
+		defaultValues[Config::Setting::SoundVolume] = 0.2f
+	};
+	Config config = defaultValues;
 	/********************************/
 
-	/* TODOLIST
-	The homework is to modify Poison Snek so that various game settings can be configured by the user by editing a text file. The settings file should be parseable regardless of the order of the settings in the file. The following settings are recommended:
+/* TODOLIST
+The homework is to modify Poison Snek so that various game settings can be configured by the user by editing a text file.
+The settings file should be parseable regardless of the order of the settings in the file.
+The following settings are recommended:
 
-    + [Tile Size] -> constrain max tile size
-    + [Board Size] -> constrain max board size
-    + [Speedup Rate]
-    + [Poison Amount] -> constrain max poison amount
-    + [Food Amount] -> constrain max food amount
-	+ [Sound Volume] !!! -> constrain max volumes up to 2.0f
+WIP	+ Read configuratons from File
+		+ [Tile Size] -> constrain max tile size
+		+ [Board Size] -> constrain max board size
+		+ [Speedup Rate]
+		+ [Poison Amount] -> constrain max poison amount
+		+ [Food Amount] -> constrain max food amount
+		+ [Sound Volume] !!! -> constrain max volumes up to 2.0f
 
-	+ handle malformed/missing input files
-		+ create defaults
-		+ handle multiple calls in the config (ignore any after the first)
-		+ ignore case and whitespace
-		+ constrain and validate values to be sensical
+WIP		+ handle malformed/missing input files
+DONE		+ create defaults
+			+ handle multiple calls in the config (ignore any after the first)
+			+ ignore case and whitespace
+			+ constrain and validate values to be sensical
 
-		+ display config warning at the head of the config (#W, #E)
-			+ max amount of lines being the amount of config options
-			+ always override #W and #E lines in the beginning and  prepend to / delete lines from  the config if  more / less  are needed
-			+ for both Warns and Errs
-			+ can only be Warns or Errs
-			+ one for the declaration and one for the value(s)
-			+ ignore comments supersceded by # afterwards
+			+ display config warning at the head of the config (#W, #E)
+				+ max amount of lines being the amount of config options
+				+ always override #W and #E lines in the beginning and  prepend to / delete lines from  the config if  more / less  are needed
+				+ for both Warns and Errs
+				+ can only be Warns or Errs
+				+ one for the declaration and one for the value(s)
+				+ ignore comments supersceded by # afterwards
 
 	+ Make game restartable (return to menu)
 
-	For this homework, you are not required to handle malformed input files, though you can attempt to handle those as a bonus challenge if you like. 
-	*/
+For this homework, you are not required to handle malformed input files, though you can attempt to handle those as a bonus challenge if you like. 
+*/
 };
