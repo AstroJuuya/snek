@@ -1,5 +1,13 @@
 #include "Config.h"
 
+Config::Config(const Setting defaultValues[Setting::COUNT])
+{
+	for (int i = 0; i < Setting::COUNT; i++)
+	{
+		settings[i] = defaultValues[i];
+	}
+}
+
 void Config::loadConfig()
 {
 }
