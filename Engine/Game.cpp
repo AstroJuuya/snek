@@ -38,7 +38,7 @@ Game::Game( MainWindow& wnd )
 	{
 		brd.SpawnContents( rng,snek,Board::CellContents::Food );
 	}
-	sndTitle.Play( 1.0f,1.0f );
+	sndTitle.Play( 1.0f, soundVolume );
 }
 
 void Game::Go()
@@ -91,7 +91,7 @@ void Game::UpdateModel()
 					contents == Board::CellContents::Obstacle )
 				{
 					gameIsOver = true;
-					sndFart.Play( rng,1.2f );
+					sndFart.Play( rng, soundVolume );
 					sndMusic.StopAll();
 				}
 				else if( contents == Board::CellContents::Food )
@@ -100,19 +100,19 @@ void Game::UpdateModel()
 					brd.ConsumeContents( next );
 					brd.SpawnContents( rng,snek,Board::CellContents::Obstacle );
 					brd.SpawnContents( rng,snek,Board::CellContents::Food );
-					sfxEat.Play( rng,0.8f );
+					sfxEat.Play( rng, soundVolume * 0.8f );
 				}
 				else if( contents == Board::CellContents::Poison )
 				{
 					snek.MoveBy( delta_loc );
 					brd.ConsumeContents( next );
 					snekMovePeriod = std::max( snekMovePeriod * snekSpeedupFactor,snekMovePeriodMin );
-					sndFart.Play( rng,0.6f );
+					sndFart.Play( rng, soundVolume * 0.6f );
 				}
 				else
 				{
 					snek.MoveBy( delta_loc );
-					sfxSlither.Play( rng,0.08f );
+					sfxSlither.Play( rng, soundVolume * 0.08f );
 				}
 			}
 		}
@@ -121,7 +121,7 @@ void Game::UpdateModel()
 	{
 		if( wnd.kbd.KeyIsPressed( VK_RETURN ) )
 		{
-			sndMusic.Play( 1.0f,0.6f );
+			sndMusic.Play( 1.0f, soundVolume * 0.6f );
 			gameIsStarted = true;
 		}
 	}
