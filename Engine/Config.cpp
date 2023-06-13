@@ -10,16 +10,30 @@ Config::Config(const Setting defaultValues[Setting::COUNT])
 
 void Config::loadConfig()
 {
+	std::ifstream in("config.cfg");
+	if (!in.is_open()) {
+		std::ofstream newCfg("config.cfg");
+		for (int i = 0; i < Setting::COUNT; i++)
+		{
+			saveToConfig(newCfg, Setting::Option(i));
+		}
+	}
 }
 
-void Config::loadFromConfig(int& value, const Setting::Option& setting) const
+float Config::loadFromConfig(const Setting::Option& setting) const
 {
-	value = int(settings[setting].value);
+	return settings[setting].value;
 }
 
-void Config::loadFromConfig(float& value, const Setting::Option& setting) const
+void Config::saveToConfig(std::ofstream& file, const Setting::Option& option) const
 {
-	value = settings[setting].value;
+	file << option_delimiter_left << option_names[option] << option_delimiter_right << '\n';
+	if( option == Setting::BoardSizeX || option == Setting::BoardSizeY )
+	{
+		file << settings[Setting::BoardSizeX].value << ', ' << settings[Setting::BoardSizeY].value << '\n';
+		return;
+	}
+	file << settings[option].value << '\n';
 }
 
 Config::Setting& Config::Setting::operator=(const Setting& setting)

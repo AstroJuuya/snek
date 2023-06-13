@@ -92,6 +92,7 @@ WIP	+ Read configuratons from File
 		+ [Poison Amount] -> constrain max poison amount
 		+ [Food Amount] -> constrain max food amount
 		+ [Sound Volume] !!! -> constrain max volumes up to 2.0f
+DONE	+ create a new configuration file with defaults if it does not exist
 
 WIP		+ handle malformed/missing input files
 DONE		+ create defaults

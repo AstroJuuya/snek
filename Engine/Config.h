@@ -1,5 +1,8 @@
 #pragma once
 
+#include <fstream>
+#include <string>
+
 class Config
 {
 public:
@@ -30,9 +33,24 @@ public:
 	Config& operator=(const Config& lhs) = delete;
 	~Config() = default;
 	void loadConfig();
-	void loadFromConfig(int& value, const Setting::Option& setting) const;
-	void loadFromConfig(float& value, const Setting::Option& setting) const;
+	float loadFromConfig(const Setting::Option& setting) const;
+
+private:
+	void saveToConfig(std::ofstream& file, const Setting::Option& option) const;
 
 private:
 	Setting settings[Setting::COUNT];
+	static constexpr char comment_sign = '#';
+	static constexpr char option_delimiter_left = '[';
+	static constexpr char option_delimiter_right = ']';
+	const std::string option_names[Setting::COUNT]
+	{
+		"TileSize",
+		"BoardSizeX",
+		"BoardSizeY",
+		"SpeedupRate",
+		"PoisonAmount",
+		"FoodAmount",
+		"SoundVolume"
+	};
 };
