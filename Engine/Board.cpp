@@ -2,10 +2,15 @@
 #include "Snake.h"
 #include <assert.h>
 
-Board::Board( Graphics& gfx )
+Board::Board( Graphics& gfx, Config& cfg )
 	:
 	gfx( gfx )
-{}
+{
+	dimension = cfg.loadFromConfig(Config::Setting::TileSize);
+	width = cfg.loadFromConfig(Config::Setting::BoardSizeX);
+	height = cfg.loadFromConfig(Config::Setting::BoardSizeY);
+	contents = new CellContents[width * height] {CellContents::Empty};
+}
 
 void Board::DrawCell( const Location & loc,Color c )
 {

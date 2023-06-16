@@ -48,6 +48,16 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	Config::Setting defaultValues[Config::Setting::COUNT]{
+	defaultValues[Config::Setting::TileSize] = 20,
+	defaultValues[Config::Setting::BoardSizeX] = 30,
+	defaultValues[Config::Setting::BoardSizeY] = 22,
+	defaultValues[Config::Setting::SpeedupRate] = 0.93f,
+	defaultValues[Config::Setting::PoisonAmount] = 240,
+	defaultValues[Config::Setting::FoodAmount] = 12,
+	defaultValues[Config::Setting::SoundVolume] = 0.2f
+	};
+	Config config = defaultValues;
 	Board brd;
 	Snake snek;
 	Location delta_loc = {1,0};
@@ -60,24 +70,14 @@ private:
 	SoundEffect sndFart = SoundEffect( { L"Sounds\\Fart.wav" } );
 	static constexpr float snekMovePeriodMin = 0.040f;
 	static constexpr float snekMovePeriodSpeedup = 0.15f; // SPEEDHACK
-	static constexpr int nPoison = 240; // Poison Amount
-	static constexpr int nFood = 12; // Food Amount
+	int nPoison = 240; // Poison Amount
+	int nFood = 12; // Food Amount
 	float snekMovePeriod = 0.4f;
 	float snekMoveCounter = 0.0f;
-	static constexpr float snekSpeedupFactor = 0.93f; // Speedup Rate on Poison eat
+	float snekSpeedupFactor = 0.93f; // Speedup Rate on Poison eat
 	bool gameIsOver = false;
 	bool gameIsStarted = false;
 	float soundVolume = 0.2f; // Sound Volume
-	Config::Setting defaultValues[Config::Setting::COUNT]{
-		defaultValues[Config::Setting::TileSize] = 20,
-		defaultValues[Config::Setting::BoardSizeX] = 30,
-		defaultValues[Config::Setting::BoardSizeY] = 22,
-		defaultValues[Config::Setting::SpeedupRate] = 0.93f,
-		defaultValues[Config::Setting::PoisonAmount] = 240,
-		defaultValues[Config::Setting::FoodAmount] = 12,
-		defaultValues[Config::Setting::SoundVolume] = 0.2f
-	};
-	Config config = defaultValues;
 	/********************************/
 
 /* TODOLIST
@@ -86,18 +86,18 @@ The settings file should be parseable regardless of the order of the settings in
 The following settings are recommended:
 
 WIP	+ Read configuratons from File
-		+ [Tile Size] -> constrain max tile size
-		+ [Board Size] -> constrain max board size
-		+ [Speedup Rate]
-		+ [Poison Amount] -> constrain max poison amount
-		+ [Food Amount] -> constrain max food amount
-		+ [Sound Volume] !!! -> constrain max volumes up to 2.0f
+DONE	+ [Tile Size] -> constrain max tile size
+DONE	+ [Board Size] -> constrain max board size
+DONE	+ [Speedup Rate]
+DONE	+ [Poison Amount] -> constrain max poison amount
+DONE	+ [Food Amount] -> constrain max food amount
+DONE	+ [Sound Volume] !!! -> constrain max volumes up to 2.0f
 DONE	+ create a new configuration file with defaults if it does not exist
 
 WIP		+ handle malformed/missing input files
 DONE		+ create defaults
 WIP			+ handle multiple calls in the config (ignore any after the first)
-WIP			+ ignore case and whitespace
+DONE		+ ignore case and whitespace
 			+ constrain and validate values to be sensical
 
 			+ display config warning at the head of the config (#W, #E)

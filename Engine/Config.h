@@ -29,7 +29,7 @@ public:
 	};
 
 public:
-	Config() = delete;
+	Config();
 	Config(const Setting defaultValues[Setting::COUNT]);
 	Config& operator=(const Config& const lhs) = delete;
 	~Config() = default;

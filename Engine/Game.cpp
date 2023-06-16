@@ -26,11 +26,15 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	brd( gfx ),
+	config(defaultValues),
+	brd( gfx, config ),
 	rng( std::random_device()() ),
 	snek( {2,2} )
 {
-	config.loadConfig();
+	soundVolume = config.loadFromConfig(Config::Setting::SoundVolume);
+	nPoison = config.loadFromConfig(Config::Setting::PoisonAmount);
+	nFood = config.loadFromConfig(Config::Setting::FoodAmount);
+	snekSpeedupFactor = config.loadFromConfig(Config::Setting::SpeedupRate);
 	for( int i = 0; i < nPoison; i++ )
 	{
 		brd.SpawnContents( rng,snek,Board::CellContents::Poison );
