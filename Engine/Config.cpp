@@ -32,13 +32,16 @@ float Config::loadFromConfig(const Setting::Option& const setting) const
 
 void Config::saveToConfig(std::ofstream& file, const Setting::Option& option) const
 {
-	file << option_delimiter_left << option_names[option] << option_delimiter_right << '\n';
-	if( option == Setting::BoardSizeX || option == Setting::BoardSizeY )
+	if( option == Setting::BoardSizeX)
 	{
-		file << settings[Setting::BoardSizeX].value << ', ' << settings[Setting::BoardSizeY].value << '\n';
+		file << option_delimiter_left << "BoardSize" << option_delimiter_right << '\n';
+		file << settings[Setting::BoardSizeX].value << ", " << settings[Setting::BoardSizeY].value << '\n';
 		return;
 	}
+	else if (option != Setting::BoardSizeY) {
+		file << option_delimiter_left << option_names[option] << option_delimiter_right << '\n';
 	file << settings[option].value << '\n';
+}
 }
 
 Config::Setting Config::parseLine(std::ifstream& const file)
