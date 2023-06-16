@@ -25,18 +25,24 @@ public:
 			COUNT
 		};
 		float value = 0;
+		Option option = COUNT;
 	};
 
 public:
 	Config() = delete;
 	Config(const Setting defaultValues[Setting::COUNT]);
-	Config& operator=(const Config& lhs) = delete;
+	Config& operator=(const Config& const lhs) = delete;
 	~Config() = default;
 	void loadConfig();
-	float loadFromConfig(const Setting::Option& setting) const;
+	float loadFromConfig(const Setting::Option& const setting) const;
 
 private:
-	void saveToConfig(std::ofstream& file, const Setting::Option& option) const;
+	void saveToConfig(std::ofstream& file, const Setting::Option& const option) const;
+	Setting parseLine(std::ifstream& const file);
+	Setting::Option getOptionFromLine(std::ifstream& const file) const;
+	float getValueFromLine(std::ifstream& const file) const;
+	float getValueFromLine(std::ifstream& const file, const Setting::Option& option) const;
+	void cleanLine(std::string& string) const;
 
 private:
 	Setting settings[Setting::COUNT];
