@@ -96,8 +96,8 @@ DONE	+ create a new configuration file with defaults if it does not exist
 
 WIP		+ handle malformed/missing input files
 DONE		+ create defaults
-			+ handle multiple calls in the config (ignore any after the first)
-			+ ignore case and whitespace
+WIP			+ handle multiple calls in the config (ignore any after the first)
+WIP			+ ignore case and whitespace
 			+ constrain and validate values to be sensical
 
 			+ display config warning at the head of the config (#W, #E)

@@ -41,7 +41,7 @@ private:
 	Setting parseLine(std::ifstream& const file);
 	Setting::Option getOptionFromLine(std::ifstream& const file) const;
 	float getValueFromLine(std::ifstream& const file) const;
-	float getValueFromLine(std::ifstream& const file, const Setting::Option& option) const;
+	void setToupleValuesFromLine(std::ifstream& const file);
 	void cleanLine(std::string& string) const;
 
 private:
