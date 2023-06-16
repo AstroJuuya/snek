@@ -8,7 +8,7 @@ Snake::Snake( const Location& loc )
 		segments[i].InitBody( bodyColors[i % nBodyColors] );
 	}
 
-	segments.push_back(loc);
+	segments.emplace_back(loc);
 }
 
 void Snake::MoveBy( const Location& delta_loc )
@@ -30,7 +30,7 @@ Location Snake::GetNextHeadLocation( const Location& delta_loc ) const
 void Snake::GrowAndMoveBy( const Location& delta_loc )
 {
 	Color c = bodyColors[segments.size() % nBodyColors];
-	segments.push_back(bodyColors[segments.size() % nBodyColors]);
+	segments.emplace_back(bodyColors[segments.size() % nBodyColors]);
 	MoveBy( delta_loc );
 }
 
