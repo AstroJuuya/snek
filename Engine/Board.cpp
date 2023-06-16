@@ -12,6 +12,12 @@ Board::Board( Graphics& gfx, Config& cfg )
 	contents = new CellContents[width * height] {CellContents::Empty};
 }
 
+Board::~Board()
+{
+	delete[] contents;
+	contents = nullptr;
+}
+
 void Board::DrawCell( const Location & loc,Color c )
 {
 	assert( loc.x >= 0 );

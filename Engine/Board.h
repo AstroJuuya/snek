@@ -16,7 +16,11 @@ public:
 		Poison
 	};
 public:
+	Board() = default;
 	Board( Graphics& gfx, Config& cfg );
+	~Board();
+	Board(const Board& brd) = delete;
+	Board operator=(const Board& brd) = delete;
 	void DrawCell( const Location& loc,Color c );
 	int GetGridWidth() const;
 	int GetGridHeight() const;
